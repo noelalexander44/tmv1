@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\Users\\noel.alexander\\Documents\\Fullstack\\Topic Modelling\\logs\\docs.ckpt"
+all_model_checkpoint_paths: "C:\\Users\\noel.alexander\\Documents\\Fullstack\\Topic Modelling\\logs\\docs.ckpt"
