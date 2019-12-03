@@ -1,6 +1,5 @@
 matplotlib==3.1.0
 numpy==1.16.4
-tensorflow==1.10.0
 Werkzeug==0.15.4
 pandas==0.24.2
 umap_learn==0.3.10
