@@ -25,13 +25,13 @@ import os
 
 
 
-UPLOAD_FOLDER = r'C:\Users\noel.alexander\Documents\Fullstack\Topic Modelling\Uploads'
-VIZ_FOLDER = r'C:\Users\noel.alexander\Documents\Fullstack\Topic Modelling\Viz'
+UPLOAD_FOLDER = r'\Uploads'
+#VIZ_FOLDER = r'C:\Users\noel.alexander\Documents\Fullstack\Topic Modelling\Viz'
 ALLOWED_EXTENSIONS = set(['csv'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['VIZ_FOLDER'] = VIZ_FOLDER
+#app.config['VIZ_FOLDER'] = VIZ_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -67,7 +67,7 @@ def upload_file():
     '''
 
 from flask import send_from_directory
-
+'''
 def sent_to_words(sentences):
     for sentence in sentences:
         yield(gensim.utils.simple_preprocess(str(sentence), deacc=True))  # deacc=True removes punctuations
@@ -226,41 +226,7 @@ def main(filename):
     
     return html
 
-
-@app.route('/visualize/<filename>')
-def tensor(filename):
-    global plot_df
-    LOG_DIR = r'C:\Users\noel.alexander\Documents\Fullstack\Topic Modelling\logs'
-    metadata = os.path.join(LOG_DIR, 'metadata.tsv')
-
-    docs = tf.Variable(lda_output, name='docs')
-    
-    with open(metadata, 'w') as metadata_file:
-        metadata_file.write('Index' + '\t' + 'Topic'  + '\n')
-        for index, row in plot_df.iterrows():
-            metadata_file.write(str(index) + '\t' + row['topics']  + '\n') 
-
-    with tf.Session() as sess:
-        saver = tf.train.Saver([docs])
-
-        sess.run(docs.initializer)
-        saver.save(sess, os.path.join(LOG_DIR, 'docs.ckpt'))
-
-        config = projector.ProjectorConfig()
-        # One can add multiple embeddings.
-        embedding = config.embeddings.add()
-        embedding.tensor_name = docs.name
-        # Link this tensor to its metadata file (e.g. labels).
-        embedding.metadata_path = metadata
-        # Saves a config file that TensorBoard will read during startup.
-        projector.visualize_embeddings(tf.summary.FileWriter(LOG_DIR), config)
-        os.system('tensorboard --logdir=logs')
-        return '''
-    <!doctype html>
-    <body>
-    <iframe src="http://localhost:6006/"></iframe>
-    </body>
-    '''
+'''
 
 if __name__ == '__main__':
     data_vectorized = None
