@@ -4,7 +4,7 @@ Werkzeug==0.15.4
 pandas==0.24.2
 umap_learn==0.3.10
 Flask==1.1.1
-pip==19.1.1
+pip==21.1
 spacy==2.0.12
 nltk==3.4.4
 gensim==3.4.0
